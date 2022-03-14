@@ -2,6 +2,7 @@
 include 'header.inc.php';
 ?>
 <div class="col-md-10 mx-auto col-lg-5">
+    <h1 class="dispaly-2" style="margin: 0.5em;">Welcome to Shopping List</h1>
         <form class="p-4 p-md-5 border rounded-3 bg-light" action="authenticate.php" method="post" name="login">
           <?php if (isset($loginError)) { echo '<div class="alert alert-danger" role="alert">' . $loginError . '</div>'; }?>
           <div class="form-floating mb-3">
