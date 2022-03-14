@@ -26,6 +26,33 @@
     $returnArray['Status'] = 'Success';
     $returnArray['itemID'] = $stmt->insert_id;
   } 
+
+  //Delete entry
+  if (isset($_POST['action']) AND $_POST['action'] == "delete") {
+    $item = abs($_POST['itemID']);
+    
+    // Bind parameters
+    $stmt = $db->prepare("DELETE FROM items WHERE userid = ? AND id = ?");
+    $stmt->bind_param("ii", $userid, $item);
+    $stmt->execute();
+    
+    $returnArray['Status'] = 'Success';
+    $returnArray['itemID'] = $item;
+  } 
+
+  //Update entry
+  if (isset($_POST['action']) AND $_POST['action'] == "update") {
+    $item = $_POST['itemID'];
+    $text = $_POST['text'];
+    
+    // Bind parameters
+    $stmt = $db->prepare("UPDATE items SET item = ? WHERE userid = ? AND id = ?");
+    $stmt->bind_param("sii", $text, $userid, $item);
+    $stmt->execute();
+    
+    $returnArray['Status'] = 'Success';
+    $returnArray['itemID'] = $item;
+  } 
 }
 echo json_encode($returnArray);
 exit();
